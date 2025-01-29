@@ -13,7 +13,7 @@ const PackageSchema = new mongoose.Schema(
       required: true,
       maxlength: 1000,
     },
-    images: {
+    profileImage: {
       type: [String], 
     },
     destination: {

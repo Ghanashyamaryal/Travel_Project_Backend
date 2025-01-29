@@ -11,11 +11,12 @@ const FestivalSchema = new mongoose.Schema(
       type: String,
       maxlength: 2000,
     },
-    traditions: {
-      type: [String], // Example: ["Lighting lamps", "Cultural dances", "Fasting"]
+    season: {
+      type: [String],
+      
     },
-    images: {
-      type: [String], // Array of image URLs
+    profileImage: {
+      type: String,
     },
   },
   { timestamps: true }

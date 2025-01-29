@@ -8,8 +8,7 @@ const TrekSchema = new mongoose.Schema(
       trim: true,
     },
     destination: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Destination", 
+      type: String,
       required: true,
     },
     difficulty: {
@@ -28,7 +27,7 @@ const TrekSchema = new mongoose.Schema(
       type: String,
       maxlength: 2000,
     },
-    images: {
+    profileImage: {
       type: [String],
     },
     bestSeasons: {

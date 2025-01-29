@@ -11,14 +11,10 @@ const HotelSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
-      maxlength: 500, 
+      maxlength: 500,
     },
     profileImage: {
       type: String,
-      default: "https://example.com/default-hotel.png", 
-    },
-    images: {
-      type: [String], // Array of image URLs
     },
     address: {
       street: { type: String, required: true },
@@ -31,45 +27,40 @@ const HotelSchema = new mongoose.Schema(
       type: String,
       match: [/^\d{10}$/, "Please enter a valid phone number"],
     },
+    starRating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+      default: 3, 
+    },
+    reviews: [
+      {
+          rating: { type: Number, required: true },
+          comment: { type: String, required: true },
+      },
+  ],
     website: {
       type: String,
-      match: [/^https?:\/\/.+\..+/, "Please enter a valid website URL"], 
+      match: [/^https?:\/\/.+\..+/, "Please enter a valid website URL"],
     },
     priceRange: {
       min: { type: Number, required: true },
       max: { type: Number, required: true },
     },
-    rating: {
-      type: Number,
-      min: 0,
-      max: 5, 
-      default: 0,
-    },
-    reviews: [
-      {
-        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        rating: { type: Number, min: 1, max: 5, required: true },
-        comment: { type: String, maxlength: 500 },
-        createdAt: { type: Date, default: Date.now },
-      },
-    ],
-    availability: {
-      type: Boolean,
-      default: true,
-    },
-    checkInTime: {
-      type: String, 
-    },
-    checkOutTime: {
-      type: String, 
-    },
-   
+    
+    // rating: {
+    //   type: Number,
+    //   min: 0,
+    //   max: 5,
+    //   default: 0,
+    // },
+    
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
-
 
 const Hotel = mongoose.model("Hotel", HotelSchema);
 export default Hotel;

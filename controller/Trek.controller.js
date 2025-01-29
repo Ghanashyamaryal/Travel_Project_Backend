@@ -3,7 +3,23 @@ import Trek from "../model/Trek.model.js";
 
 export const createTrek = async (req, res) => {
     try {
-        const newTrek = new Trek(req.body);
+        const { name, description, difficulty,duration, maxAltitude, destination,bestSeasons,guideRequired,costPerPerson, } = req.body;
+    
+        const profileImage = req.file ? req.file.filename : null;
+    
+        const newTrek = new Trek({
+          name,
+          description,
+          difficulty,
+          duration,
+          maxAltitude,
+          destination,
+          destination, 
+          bestSeasons,
+          guideRequired,
+          profileImage,
+          costPerPerson
+        });
         await newTrek.save();
         res.status(201).json({ message: "Trek created successfully.", trek: newTrek });
     } catch (error) {
@@ -36,19 +52,32 @@ export const getTrekById = async (req, res) => {
 };
 
 
+
+
 export const updateTrekById = async (req, res) => {
     const { id } = req.params;
     try {
-        const updatedTrek = await Trek.findByIdAndUpdate(id, req.body, { new: true });
-        if (!updatedTrek) {
-            return res.status(404).json({ message: "Trek not found." });
-        }
-        res.status(200).json({ message: "Trek updated successfully.", trek: updatedTrek });
+      const updateData = { ...req.body };
+  
+      if (req.file) {
+        updateData.profileImage = req.file.filename;
+      }
+  
+      const updatedTrek = await Trek.findByIdAndUpdate(id, updateData, {
+        new: true,
+      });
+      if (!updatedTrek) {
+        return res.status(404).json({ message: "Trek not found." });
+      }
+  
+      res.status(200).json({
+        message: "Trek updated successfully.",
+        Trek: updatedTrek,
+      });
     } catch (error) {
-        res.status(500).json({ message: "Error updating trek.", error: error.message });
+      res.status(500).json({ message: "Error updating Trek.", error: error.message });
     }
-};
-
+  };
 
 export const deleteTrekById = async (req, res) => {
     const { id } = req.params;

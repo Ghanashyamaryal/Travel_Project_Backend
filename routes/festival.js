@@ -7,17 +7,18 @@ import {
     updateFestivalById,
     deleteFestivalById
 } from "../controller/Festival.controller.js"
+import upload from "../middleware/multerMiddleware.js";
 
 const router = express.Router();
 
 
-router.post("/", createFestival);
+router.post("/", upload.single('profileImage'),createFestival);
 
 router.get("/", getAllFestivals);
 
 router.get("/:id", getFestivalById);
 
-router.put("/:id", updateFestivalById);
+router.put("/:id",upload.single('profileImage'), updateFestivalById);
 
 router.delete("/:id", deleteFestivalById);
 

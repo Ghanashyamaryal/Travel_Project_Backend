@@ -8,28 +8,27 @@ const DestinationSchema = new mongoose.Schema(
       trim: true,
       minlength: 3,
     },
+    type:{
+      type:String
+    },
     location: {
       country: { type: String, required: true },
       state: { type: String },
       city: { type: String },
-      coordinates: {
-        latitude: { type: Number, required: true },
-        longitude: { type: Number, required: true },
-      },
     },
     description: {
       type: String,
       required: true,
       maxlength: 1000,
     },
-    images: {
-      type: [String], 
+    profileImage: {
+      type: String, 
     },
     bestTimeToVisit: {
-      type: [String], // Example: ["Spring", "Autumn"]
+      type: [String], 
     },
     activities: {
-      type: [String], // Example: ["Hiking", "Photography", "Camping"]
+      type: [String],
     },
     rating: {
       type: Number,

@@ -4,7 +4,17 @@ import Festival from "../model/Festival.model.js";
 
 export const createFestival = async (req, res) => {
     try {
-        const newFestival = new Festival(req.body);
+        const { name, description, season } = req.body;
+
+        const profileImage = req.file ? req.file.filename : null;
+    
+        const newFestival = new Festival({
+          name,
+          description,
+          season,
+          profileImage, 
+        });
+        
         await newFestival.save();
         res.status(201).json({ message: "Festival created successfully.", festival: newFestival });
     } catch (error) {
@@ -37,18 +47,31 @@ export const getFestivalById = async (req, res) => {
 };
 
 
+
 export const updateFestivalById = async (req, res) => {
     const { id } = req.params;
     try {
-        const updatedFestival = await Festival.findByIdAndUpdate(id, req.body, { new: true });
-        if (!updatedFestival) {
-            return res.status(404).json({ message: "Festival not found." });
-        }
-        res.status(200).json({ message: "Festival updated successfully.", festival: updatedFestival });
+      const updateData = { ...req.body };
+  
+      if (req.file) {
+        updateData.profileImage = req.file.filename;
+      }
+  
+      const updatedFestival = await Festival.findByIdAndUpdate(id, updateData, {
+        new: true,
+      });
+      if (!updatedFestival) {
+        return res.status(404).json({ message: "Festival not found." });
+      }
+  
+      res.status(200).json({
+        message: "Festival updated successfully.",
+        Festival: updatedFestival,
+      });
     } catch (error) {
-        res.status(500).json({ message: "Error updating festival.", error: error.message });
+      res.status(500).json({ message: "Error updating Festival.", error: error.message });
     }
-};
+  };
 
 
 export const deleteFestivalById = async (req, res) => {

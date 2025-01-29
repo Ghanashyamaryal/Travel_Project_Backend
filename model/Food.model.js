@@ -8,7 +8,7 @@ const foodSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      required: true, // Category of the food item (e.g., Veg, Non-Veg, Vegan)
+      required: true, 
     },
     description: {
       type: String,
