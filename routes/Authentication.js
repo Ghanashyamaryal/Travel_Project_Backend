@@ -3,10 +3,8 @@ import Authentication from "../controller/Authentication.controller.js";
 import { verifyToken, verifyRole } from "../middleware/jwtmiddleware.js"
 const router = express.Router();
 
-//public route
 router.post("/login", Authentication);
 
-// Protected route for admin
 router.get(
   "/admin",
   verifyToken,

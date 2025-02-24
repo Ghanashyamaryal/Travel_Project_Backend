@@ -15,7 +15,14 @@ const DestinationSchema = new mongoose.Schema(
       country: { type: String, required: true },
       state: { type: String },
       city: { type: String },
+      latitude: { type: Number, required: true },
+      longitude: { type: Number, required: true },
     },
+    reviews: [
+      {
+          rating: { type: Number, required: true,default:1 },
+          comment: { type: String, required: true ,default:""},
+      }],
     description: {
       type: String,
       required: true,

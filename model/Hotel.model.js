@@ -36,8 +36,8 @@ const HotelSchema = new mongoose.Schema(
     },
     reviews: [
       {
-          rating: { type: Number, required: true },
-          comment: { type: String, required: true },
+          rating: { type: Number, required: true,default:1 },
+          comment: { type: String, required: true ,default:""},
       },
   ],
     website: {
@@ -48,13 +48,6 @@ const HotelSchema = new mongoose.Schema(
       min: { type: Number, required: true },
       max: { type: Number, required: true },
     },
-    
-    // rating: {
-    //   type: Number,
-    //   min: 0,
-    //   max: 5,
-    //   default: 0,
-    // },
     
   },
   {
