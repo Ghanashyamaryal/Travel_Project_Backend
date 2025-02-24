@@ -50,7 +50,8 @@ export const Register = async (req, res) => {
 
         res.status(201).json({
             message: "User registered successfully.",
-            role: isAdmin ? "admin" : "user"
+            role: isAdmin ? "admin" : "user",
+            username: username
         });
     } catch (error) {
         console.error("Error registering user:", error);

@@ -29,8 +29,6 @@ import plantrip from "./routes/Plantrip.js"
 import search from "./routes/Search.js"
 
 
-
-
 app.use("/api/auth", auth);
 app.use("/api/destination", destination);
 app.use("/api/festival", festival);
