@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "http://localhost:5173", 
+        origin: "*",
         credentials: true,
     })
 );
@@ -39,7 +39,7 @@ app.use("/api/package", packages);
 app.use("/api/trek", trek);
 app.use("/api/user", user);
 app.use("/api/plantrip", plantrip);
-app.use("/api/search",search);
+app.use("/api/search", search);
 
 
 app.all("*", (req, res) => {
